@@ -1,0 +1,3 @@
+[submodule "ida-plugin/idasdk76"]
+	path = ida-plugin/idasdk76
+	url = git@github.com:helloobaby/idasdk76.git
