@@ -135,7 +135,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <OutputFile>E:\IDA Pro 7.6\plugins\sample.dll</OutputFile>
+      <OutputFile>E:\IDA Pro 7.6\plugins\sample64.dll</OutputFile>
       <AdditionalLibraryDirectories>$(ProjectDir)idasdk76\lib\x64_win_vc_64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>ida.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>

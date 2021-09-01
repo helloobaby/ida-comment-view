@@ -6,11 +6,8 @@
 
 链接器-常规-输出文件 改为你的IDA plugins的路径，方便测试
 
-还有问题的话参考
+还有问题的话baidu/google
 
-https://blog.csdn.net/qq_34905587/article/details/108391159
+目前插件加载会自动注册一个action，右键可以看到，每个action继承于IDA提供的action_handler_t
 
-
-
-
-ida7.5及之后接口变了，在写插件的过程中会在sdk中添加一些必要的中文注释
+成员函数activate跟qt的信号槽差不多，需要实现什么就写在那里
