@@ -1,5 +1,5 @@
-cmake_minimum_required (VERSION 3.11) # fetchcontent after 3.11 
-project(example)
+﻿cmake_minimum_required (VERSION 3.11) # fetchcontent after 3.11 
+project(comment_view)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/idasdk76/include)
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/idasdk76/lib/x64_win_vc_64/) #链接器->常规->附加库目录

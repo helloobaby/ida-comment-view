@@ -1,3 +1,14 @@
+﻿
+add_library(comment_view64 SHARED dllmain.cpp pch.cpp pch.h pluginmain.cpp framework.h) ##这个写在这层才有用
+
+SET_TARGET_PROPERTIES(comment_view64 PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${IDA_INSTALL_DIR}/plugins/)
+SET_TARGET_PROPERTIES(comment_view64 PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${IDA_INSTALL_DIR}/plugins/)
+
+#下面这个会自动后面加/debug或者/release的
+#SET_TARGET_PROPERTIES(comment_view64 PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${IDA_INSTALL_DIR}/plugins/)
 
 
-add_library(example SHARED dllmain.cpp pch.cpp pch.h pluginmain.cpp framework.h) ##这个写在这层才有用
+#DEBUG模式下启用DEBUG宏
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -DDEBUG")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
+
