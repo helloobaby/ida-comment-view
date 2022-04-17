@@ -1,13 +1,13 @@
-´ËÏîÄ¿Ö¼ÔÚ´î½¨Ò»¸öIDA ²å¼þÄ£°å£¬ÐèÒª¿ª·¢²å¼þµÄÊ±ºògit cloneÏÂÀ´¾Í¿ÉÒÔÊ¹ÓÃ£¬²¢ÇÒ°üº¬7.6°æ±¾µÄsdk£¬²»ÐèÒªÖØ¸´ÅäÖÃ»·¾³¡£
+2022.4.17   
+ç”¨cmakeå¼„äº†ä¸€ä¸‹ã€‚
 
-ÒòÎªIDA32ºÍIDA64¶¼ÊÇ64Î»µÄ£¬ËùÒÔÔÚÑ¡Ôñx86/x64±àÒëµÄÊ±ºòÒ»ÖÂÑ¡Release x64£¬µ«ÊÇÐèÒª¶îÍâ×öµÄÊÇ£¬
 
-µ±ÄãÐèÒªÓÃida32.exeµÄÊ±ºò£¬Ò²¾ÍÊÇ·´±àÒë32Î»µÄ³ÌÐò£¬ÐèÒªÔÚÁ´½Ó->³£¹æ->¸½¼Ó°üº¬Ä¿Â¼  ¸ÄÎªx64_win_vc_32
 
-Á´½ÓÆ÷-³£¹æ-Êä³öÎÄ¼þ ¸ÄÎªÄãµÄIDA pluginsµÄÂ·¾¶£¬·½±ã²âÊÔ
+Example:  
+cmake -DIDA_INSTALL_DIR="E:\IDA Pro 7.6" ..
 
-»¹ÓÐÎÊÌâµÄ»°baidu/google
 
-Ä¿Ç°²å¼þ¼ÓÔØ»á×Ô¶¯×¢²áÒ»¸öaction£¬ÓÒ¼ü¿ÉÒÔ¿´µ½£¬Ã¿¸öaction¼Ì³ÐÓÚIDAÌá¹©µÄaction_handler_t
+ida32å’Œida64éƒ½æ˜¯64ä½çš„,ä½†æ˜¯åˆ†æžçš„ç¨‹åºæœ‰32å’Œ64,å¦‚æžœåˆ†æž32çš„è¯,éœ€è¦æ”¹ä¸€ä¸‹cmakelist,æŠŠx64_win_vc_64æ”¹æˆx64_win_vc_32
 
-³ÉÔ±º¯Êýactivate¸úqtµÄÐÅºÅ²Û²î²»¶à£¬ÐèÒªÊµÏÖÊ²Ã´¾ÍÐ´ÔÚÄÇÀï
+
+ç¼–è¯‘å®Œä¹‹åŽidaæ‰“å¼€ä¼šè‡ªåŠ¨åŠ è½½æ’ä»¶æµ‹è¯•(ä¸Šé¢æŒ‡å®šäº†idaå®‰è£…ç›®å½•)

@@ -1,0 +1,3 @@
+repository='https://github.com/helloobaby/idasdk76.git'
+module=''
+tag='origin'

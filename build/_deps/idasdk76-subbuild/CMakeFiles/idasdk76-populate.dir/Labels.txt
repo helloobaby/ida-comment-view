@@ -1,0 +1,14 @@
+# Target labels
+ idasdk76-populate
+# Source files and their labels
+D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/idasdk76-populate
+D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/f5db7907e3c826d931fc8f0eb09f03f6/idasdk76-populate.rule
+D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/788c580a3b2267fac5806596cfe5be46/idasdk76-populate-complete.rule
+D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/36229b35eaba2be3843f6c0875650231/idasdk76-populate-build.rule
+D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/36229b35eaba2be3843f6c0875650231/idasdk76-populate-configure.rule
+D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/36229b35eaba2be3843f6c0875650231/idasdk76-populate-download.rule
+D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/36229b35eaba2be3843f6c0875650231/idasdk76-populate-install.rule
+D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/36229b35eaba2be3843f6c0875650231/idasdk76-populate-mkdir.rule
+D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/36229b35eaba2be3843f6c0875650231/idasdk76-populate-patch.rule
+D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/36229b35eaba2be3843f6c0875650231/idasdk76-populate-test.rule
+D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/36229b35eaba2be3843f6c0875650231/idasdk76-populate-update.rule

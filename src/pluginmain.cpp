@@ -8,7 +8,7 @@
 // 这个宏确保你没有使用sdk中废弃的代码
 //
 #define NO_OBSOLETE_FUNCS
-#include "./hexrays_sdk/include/hexrays.hpp"
+#include <hexrays_sdk/include/hexrays.hpp>
 
 //IDA内部用的名字，识别每个UI部件的,前面加作用域是IDA的推荐做法
 #define action_internal_name_1 "example::name"

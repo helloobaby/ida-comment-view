@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/idasdk76-populate"
+		},
+		{
+			"file" : "D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/f5db7907e3c826d931fc8f0eb09f03f6/idasdk76-populate.rule"
+		},
+		{
+			"file" : "D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/788c580a3b2267fac5806596cfe5be46/idasdk76-populate-complete.rule"
+		},
+		{
+			"file" : "D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/36229b35eaba2be3843f6c0875650231/idasdk76-populate-build.rule"
+		},
+		{
+			"file" : "D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/36229b35eaba2be3843f6c0875650231/idasdk76-populate-configure.rule"
+		},
+		{
+			"file" : "D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/36229b35eaba2be3843f6c0875650231/idasdk76-populate-download.rule"
+		},
+		{
+			"file" : "D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/36229b35eaba2be3843f6c0875650231/idasdk76-populate-install.rule"
+		},
+		{
+			"file" : "D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/36229b35eaba2be3843f6c0875650231/idasdk76-populate-mkdir.rule"
+		},
+		{
+			"file" : "D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/36229b35eaba2be3843f6c0875650231/idasdk76-populate-patch.rule"
+		},
+		{
+			"file" : "D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/36229b35eaba2be3843f6c0875650231/idasdk76-populate-test.rule"
+		},
+		{
+			"file" : "D:/vs-code/ida-plugin/build/_deps/idasdk76-subbuild/CMakeFiles/36229b35eaba2be3843f6c0875650231/idasdk76-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"idasdk76-populate"
+		],
+		"name" : "idasdk76-populate"
+	}
+}
