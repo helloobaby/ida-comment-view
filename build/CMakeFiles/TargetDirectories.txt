@@ -1,3 +1,0 @@
-D:/vs-code/ida-plugin/build/CMakeFiles/ALL_BUILD.dir
-D:/vs-code/ida-plugin/build/CMakeFiles/ZERO_CHECK.dir
-D:/vs-code/ida-plugin/build/src/CMakeFiles/example.dir
