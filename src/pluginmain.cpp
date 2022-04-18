@@ -2,6 +2,7 @@
 
 //这个涉及到地址长度的问题，用ida64.exe就得加这个宏，ida32.exe不用
 #define __EA64__
+
 //
 // ida7.5及以上的插件一定要定义这个宏
 // 为了保证老代码能够编译，IDA还是会支持一些老结构体，但是在新IDA上全都不能用，会导致未定义问题
@@ -9,76 +10,53 @@
 //
 #define NO_OBSOLETE_FUNCS
 #include <hexrays_sdk/include/hexrays.hpp>
+#include <optional>
+#include <format>
 
-// IDA内部用的名字，识别每个UI部件的,前面加作用域是IDA的推荐做法
-#define action_internal_name_1 "example::name"
+ssize_t idaapi ui_hook(void* user_data, int notification_code, va_list va);
 
-//这个是右键显示给用户的名字
-#define action_show_name_1 "example"
-
-ssize_t idaapi ui_hook(void* user_data, int notification_code, va_list va) {
-  if (notification_code == ui_populating_widget_popup) {
-    TWidget* view = va_arg(va, TWidget*);
-    if (get_widget_type(view) == BWN_DISASM) {
-      TPopupMenu* p = va_arg(va, TPopupMenu*);
-      attach_action_to_popup(view, p, action_internal_name_1, nullptr,
-                             SETMENU_FIRST);
-    }
-  }
-
-  return false;
-}
-
-struct example_action : public action_handler_t {
-  // action被触发的主逻辑
-  virtual int idaapi activate(action_activation_ctx_t* ctx) override {
-    msg("hello world");
-    return true;
-  }
-
-  virtual action_state_t idaapi update(action_update_ctx_t* ctx) override {
-    // AST_DISABLE选项的话action就是灰色，无法点
-    return AST_ENABLE_ALWAYS;
-  }
-};
-
-example_action action1;
 struct plugin_ctx_t : public plugmod_t {
-  plugin_ctx_t() {
-    register_action(
-        ACTION_DESC_LITERAL_PLUGMOD(action_internal_name_1,  // action name
-                                    action_show_name_1,      // show name
-                                    &action1, this, nullptr, nullptr, -1));
-
-    hook_to_notification_point(HT_UI, ui_hook);
+  plugin_ctx_t() {}
+  virtual bool idaapi run(size_t) override;
+  std::optional<qstring> get_ea_comment(ea_t ea) {
+    qstring cmt;
+    get_cmt(&cmt, ea, 0);
+    if (cmt.empty()) {
+      get_cmt(&cmt, ea, 1);
+      if (cmt.empty())
+        return std::nullopt;
+      else
+        return cmt;
+    } else
+      return cmt;
   }
-  ~plugin_ctx_t() {
-    unregister_action(action_internal_name_1);
+  void show_comment_list();
+
+    ~plugin_ctx_t() {
     unhook_from_notification_point(HT_UI, ui_hook);
     term_hexrays_plugin();
-  }
-  virtual bool idaapi run(size_t) override;
-};
+    }
 
+};
 //--------------------------------------------------------------------------
 bool idaapi plugin_ctx_t::run(size_t) {
-  msg("hello world");
-
+  hook_to_notification_point(HT_UI, ui_hook);
+  show_comment_list();
+  
   return true;
 }
 
 //--------------------------------------------------------------------------
 // Initialize the plugin.
 static plugmod_t* idaapi init() {
-  if (!init_hexrays_plugin()) return nullptr;  // no decompiler
+  if (!init_hexrays_plugin()) {
+    return nullptr;  // plugin will not be loaded
+  }
   const char* hxver = get_hexrays_version();
-  msg("Hex-rays version %s has been detected, %s ready to use\n", hxver,
-      PLUGIN.wanted_name);
+  
+  msg(std::format("[{}]make sure your IDA version not lower than 7.5\n", PLUGIN.wanted_name).c_str());
   return new plugin_ctx_t;
 }
-
-//--------------------------------------------------------------------------
-static const char comment[] = "whatever you want";
 
 //--------------------------------------------------------------------------
 //
@@ -87,12 +65,42 @@ static const char comment[] = "whatever you want";
 //--------------------------------------------------------------------------
 plugin_t PLUGIN = {
     IDP_INTERFACE_VERSION,
-    PLUGIN_MULTI | PLUGIN_UNL,  // PLUGIN_UNL用来调试，run一次就自动卸载的功能
-    init,                       // initialize
+#ifdef DEBUG
+    PLUGIN_MULTI |
+        PLUGIN_UNL,  // PLUGIN_UNL作用是在插件run被调用的时候自动unload,再次run的时候ida会去尝试重新加载新编译的DLL
+#else
+    PLUGIN_MULTI,
+#endif  // DBG
+    init,
     nullptr,
     nullptr,
-    comment,              // long comment about the plugin
-    nullptr,              // multiline help about the plugin
-    "whatever you want",  // 在Edit->Plugins中显示的名字
-    nullptr,              // 热键
+    nullptr,
+    nullptr,
+    "comment_list",
+    nullptr,
 };
+
+/*
+shift+;  是unrepeatable cmt
+; 是repeatable cmt
+
+shift+;会覆盖;
+
+所以如果有unrep的,应该显示unrep,没有unrep再显示rep
+
+大多数人都是用;号直接注释的
+但是如果一个地址有很多行(函数开头),;号优先会注释在开头,但是shift+;可以注释在任意位置
+*/
+void plugin_ctx_t::show_comment_list() {
+
+    
+    
+    
+}
+
+ssize_t ui_hook(void* user_data, int notification_code,
+                              va_list va) {
+
+    
+  return 0;
+}

@@ -1,5 +1,5 @@
 2022.4.17   
-用cmake弄了一下。
+用cmake弄了一下。 原来是个ida插件模板,现在重写为show all comments的脚本,支持ida7.5及以上(新api接口就行)
 
 
 
