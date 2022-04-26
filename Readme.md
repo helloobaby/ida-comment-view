@@ -19,6 +19,7 @@ https://www.hex-rays.com/products/ida/support/ida74_idapython_no_bc695_porting_g
 
 
 
-2022.4.26
-这个东西可以被ida的一个叫bookmark的功能替代,所以没有开发的必要。
+2022.4.26  
+
+这个东西可以被ida的一个叫bookmark的功能替代
 
