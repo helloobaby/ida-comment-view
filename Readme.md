@@ -16,3 +16,9 @@ ida32和ida64都是64位的,但是分析的程序有32和64,如果分析32的话
 
 ida 7.5前到7.5后 api迁移记录  
 https://www.hex-rays.com/products/ida/support/ida74_idapython_no_bc695_porting_guide.shtml
+
+
+
+2022.4.26
+这个东西可以被ida的一个叫bookmark的功能替代,所以没有开发的必要。
+
