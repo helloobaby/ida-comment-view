@@ -18,5 +18,5 @@ ida 7.5前到7.5后 api迁移记录
 https://www.hex-rays.com/products/ida/support/ida74_idapython_no_bc695_porting_guide.shtml
 
 
-
+bookmark is shit!
 
