@@ -44,3 +44,8 @@ https://www.hex-rays.com/products/ida/support/ida74_idapython_no_bc695_porting_g
 
 
 F5界面的注释也拿不到(get_cmt这函数太垃圾了)
+
+
+
+![Image Text](https://github.com/helloobaby/ida-comment-view/blob/master/screenshot-20220811-181545.png)
+
