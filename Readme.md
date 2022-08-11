@@ -19,3 +19,10 @@ https://www.hex-rays.com/products/ida/support/ida74_idapython_no_bc695_porting_g
 
 
 
+##### TODO:
+
+数据库很大的话执行很慢。  
+
+
+
+如果ida能够提供一条注释的前后边界就好很多。就不用地址不断地加一加一遍历了。
