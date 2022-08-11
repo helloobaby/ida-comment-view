@@ -1,9 +1,5 @@
-2022.4.17   
-用cmake弄了一下。 原来是个ida插件模板,现在重写为show all comments的脚本,支持ida7.5及以上(新api接口就行)
+##### 编译:    
 
-
-
-Example:  
 mkdir build && cd build && cmake -DIDA_INSTALL_DIR="E:\IDA Pro 7.6" ..
 
 
@@ -18,5 +14,8 @@ ida 7.5前到7.5后 api迁移记录
 https://www.hex-rays.com/products/ida/support/ida74_idapython_no_bc695_porting_guide.shtml
 
 
-bookmark is shit!
+
+
+
+
 

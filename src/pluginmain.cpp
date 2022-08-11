@@ -106,16 +106,24 @@ void calls_chooser_t::build_list() {
 
         ea_t seg_start = seg->start_ea;
         ea_t seg_end = seg->end_ea;
+        insn_t insn;
 
         msg("[+]seg_start : %llx,seg_end : %llx\n", seg_start, seg_end);
 
         for (ea_t i = seg_start; i < seg_end;i++)
         {
+            auto length = decode_insn(&insn, i);
             std::optional<qstring> ret = get_ea_comment(i);
             if (ret) {
                 std::string utf8 = to_utf8(to_utf16((*ret).c_str()));
-                list.push_back({ std::format("0x{:#x}", i).c_str() ,utf8.c_str() });
+                list.push_back({ std::format("{:#x}", i).c_str() ,utf8.c_str() });
+            
+                if(length){ //×¢ÊÍÔÚÖ¸Áî·¶Î§ÄÚ
+                    i = i + length;
+                }
+
             }
+            
         }
     }
 
