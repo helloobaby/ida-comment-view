@@ -122,10 +122,9 @@ void calls_chooser_t::build_list() {
                 i = i + length;
             }
             else i++;
-            
         }
     }
-
+    
 }
 
 

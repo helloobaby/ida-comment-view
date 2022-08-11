@@ -40,3 +40,7 @@ https://www.hex-rays.com/products/ida/support/ida74_idapython_no_bc695_porting_g
 
 
 删除本身自带的一些注释  
+
+
+
+F5界面的注释也拿不到(get_cmt这函数太垃圾了)
