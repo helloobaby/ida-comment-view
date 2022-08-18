@@ -19,31 +19,17 @@ https://www.hex-rays.com/products/ida/support/ida74_idapython_no_bc695_porting_g
 
 
 
-##### TODO:
-
-数据库很大的话执行很慢。  
+##### TODO: 
 
 
 
-如果ida能够提供一条注释的前后边界就好很多。就不用地址不断地加一加一遍历了。  
+函数头那一行地址的注释拿不到   
 
+ https://solveforum.com/forums/threads/solved-how-to-get-the-auto-generated-comments-for-functions-in-ida.625795/ 
 
+删除本身自带的一些注释    
 
-双击那一栏跳转到指定位置  
-
-
-
-函数头那一行地址的注释拿不到  
-
- https://solveforum.com/forums/threads/solved-how-to-get-the-auto-generated-comments-for-functions-in-ida.625795/
-
-
-
-删除本身自带的一些注释  
-
-
-
-F5界面的注释也拿不到(get_cmt这函数太垃圾了)
+F5界面的注释也拿不到  
 
 
 

@@ -3,6 +3,9 @@
 #include <format>
 #include <codecvt>
 
+#define action_internal_name_1 "pdbheader::CommentView"
+#define action_show_name_1 "CommentView"
+
 // encoding function
 std::string to_utf8(const std::wstring& wide_string)
 {
@@ -20,6 +23,20 @@ std::wstring to_utf16(const std::string& u8string) {
     return utf16_conv.from_bytes(u8string);
 }
 
+ssize_t idaapi ui_hook(void* user_data, int notification_code, va_list va)
+{
+    if (notification_code == ui_populating_widget_popup)
+    {
+        TWidget* view = va_arg(va, TWidget*);
+        if (get_widget_type(view) == BWN_DISASM) {
+            TPopupMenu* p = va_arg(va, TPopupMenu*);
+
+            attach_action_to_popup(view, p, action_internal_name_1, nullptr, SETMENU_POSMASK);
+        }
+    }
+
+    return false;
+}
 
 struct calls_chooser_t : public chooser_t
 {
@@ -37,7 +54,7 @@ public:
 
     // this object must be allocated using `new`
     calls_chooser_t();
-
+    virtual void idaapi select(ssize_t n) const;
     // function that is used to decide whether a new chooser should be opened
     // or we can use the existing one.
     // The contents of the window are completely determined by its title
@@ -49,6 +66,10 @@ public:
 
     // function that returns number of lines in the list
     virtual size_t idaapi get_count() const override { return list.size(); }
+
+    const info* get_item(uint32_t n)const {
+        return n >= list.size() ? NULL : &list[n];
+    }
 
     // function that generates the list line
     virtual void idaapi get_row(
@@ -95,6 +116,16 @@ calls_chooser_t::calls_chooser_t() : chooser_t(0, sizeof(widths_)/sizeof(int), w
     build_list();
 }
 
+void idaapi calls_chooser_t::select(ssize_t n) const {
+    auto item = list[n];
+    msg("[+]select address %s\n",item.address.c_str());
+
+    //将IDA TEXT-View跳转到指定地址
+
+}
+
+
+
 void calls_chooser_t::build_list() {
     
     int seg_count = get_segm_qty();
@@ -118,7 +149,7 @@ void calls_chooser_t::build_list() {
                 std::string utf8 = to_utf8(to_utf16((*ret).c_str()));
                 list.push_back({ std::format("{:#x}", i).c_str() ,utf8.c_str() });
             }
-            if (length) { //注释在指令范围内,越过这条指令
+            if (length) {       //注释在指令范围内,越过这条指令
                 i = i + length;
             }
             else i++;
@@ -140,35 +171,50 @@ void idaapi calls_chooser_t::get_row(
     cols[1] = list[n].comment;
 }
 
-struct plugin_ctx_t : public plugmod_t {
-    plugin_ctx_t() {}
-    virtual bool idaapi run(size_t) override;
-    std::optional<qstring> get_ea_comment(ea_t ea) {
-        qstring cmt;
-        get_cmt(&cmt, ea, 0);
-        if (cmt.empty()) {
-            get_cmt(&cmt, ea, 1);
-            if (cmt.empty())
-                return std::nullopt;
-            else
-                return cmt;
-        }
-        else
-            return cmt;
+struct example_action : public action_handler_t
+{
+    virtual int idaapi activate(action_activation_ctx_t* ctx) override
+    {
+        calls_chooser_t* ch = new calls_chooser_t();
+        ::choose(ch, nullptr);
+        return true;
     }
-    void show_comment_list();
+    virtual action_state_t idaapi update(action_update_ctx_t* ctx) override
+    {
+        return AST_ENABLE_ALWAYS;
+    }
+
+};
+
+example_action action1;
+struct plugin_ctx_t : public plugmod_t {
+    plugin_ctx_t() {
+        register_action(ACTION_DESC_LITERAL_PLUGMOD(
+            action_internal_name_1,// action name
+            action_show_name_1, // show name
+            &action1,
+            this,
+            nullptr,
+            nullptr,
+            -1));
+        hook_to_notification_point(HT_UI, ui_hook);
+    }
+    virtual bool idaapi run(size_t) override;
 
     ~plugin_ctx_t() {
+        unregister_action(action_internal_name_1);
+        unhook_from_notification_point(HT_UI, ui_hook);
         term_hexrays_plugin();
     }
 
 };
+
+
 //--------------------------------------------------------------------------
 bool idaapi plugin_ctx_t::run(size_t) {
-    //show_comment_list();
 
     calls_chooser_t* ch = new calls_chooser_t();
-    ch->choose(); 
+    ::choose(ch, nullptr);
 
     return true;
 }
@@ -200,25 +246,3 @@ plugin_t PLUGIN = {
     "CommentList",
     nullptr,
 };
-
-/*
-shift+;  是unrepeatable cmt
-; 是repeatable cmt
-shift+;会覆盖;
-所以如果有unrep的,应该显示unrep,没有unrep再显示rep
-大多数人都是用;号直接注释的
-但是如果一个地址有很多行(函数开头),;号优先会注释在开头,但是shift+;可以注释在任意位置
-*/
-void plugin_ctx_t::show_comment_list() {
-
-
-
-
-}
-
-ssize_t ui_hook(void* user_data, int notification_code,
-    va_list va) {
-
-
-    return 0;
-}
