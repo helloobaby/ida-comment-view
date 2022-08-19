@@ -156,7 +156,7 @@ void calls_chooser_t::build_list() {
         ea_t seg_end = seg->end_ea;
         insn_t insn;
 
-        msg("[+]seg_start : %llx,seg_end : %llx\n", seg_start, seg_end);
+        msg(std::format("[+]seg_start : {:#x},seg_end : {:#x}\n", seg_start, seg_end).c_str());
 
         for (ea_t i = seg_start; i < seg_end;)
         {
