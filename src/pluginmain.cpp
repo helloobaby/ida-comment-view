@@ -1,7 +1,9 @@
 #include <hexrays_sdk/include/hexrays.hpp>
+#include <graph.hpp>
 #include <optional>
 #include <format>
 #include <codecvt>
+
 
 #define action_internal_name_1 "pdbheader::CommentView"
 #define action_show_name_1 "CommentView"
@@ -83,8 +85,24 @@ public:
         get_cmt(&cmt, ea, 0);
         if (cmt.empty()) {
             get_cmt(&cmt, ea, 1);
-            if (cmt.empty())
+            if (cmt.empty()) {
+
+                auto func = get_func(ea);
+                if (func) {
+                    get_func_cmt(&cmt, func, 0);
+                    if (cmt.empty()) {
+                        get_func_cmt(&cmt, func, 1);
+                        if (cmt.empty()) {
+                            return std::nullopt;
+                        }
+                        else
+                            return cmt;
+                    }
+                    else
+                        return cmt;
+                }
                 return std::nullopt;
+            }
             else
                 return cmt;
         }
@@ -117,10 +135,9 @@ calls_chooser_t::calls_chooser_t() : chooser_t(0, sizeof(widths_)/sizeof(int), w
 }
 
 void idaapi calls_chooser_t::select(ssize_t n) const {
+
     auto item = list[n];
     msg("[+]select address %s\n",item.address.c_str());
-
-    //将IDA TEXT-View跳转到指定地址
 
 }
 
@@ -183,7 +200,7 @@ struct example_action : public action_handler_t
     {
         return AST_ENABLE_ALWAYS;
     }
-
+    
 };
 
 example_action action1;
