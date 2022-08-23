@@ -3,6 +3,7 @@
 #include <optional>
 #include <format>
 #include <codecvt>
+#include <string>
 
 
 #define action_internal_name_1 "pdbheader::CommentView"
@@ -40,6 +41,15 @@ ssize_t idaapi ui_hook(void* user_data, int notification_code, va_list va)
     return false;
 }
 
+ssize_t idaapi ui_hook_view(void* user_data, int notification_code, va_list va) {
+    if (notification_code == view_notification_t::view_dblclick) {
+        //msg("[+]dbg click\n");
+    }
+
+    return false;
+}
+
+
 struct calls_chooser_t : public chooser_t
 {
 protected:
@@ -57,6 +67,7 @@ public:
     // this object must be allocated using `new`
     calls_chooser_t();
     virtual void idaapi select(ssize_t n) const;
+    virtual void idaapi enter(ssize_t n) const;
     // function that is used to decide whether a new chooser should be opened
     // or we can use the existing one.
     // The contents of the window are completely determined by its title
@@ -138,7 +149,14 @@ void idaapi calls_chooser_t::select(ssize_t n) const {
 
     auto item = list[n];
     msg("[+]select address %s\n",item.address.c_str());
+    ea_t address = std::stoull(item.address.c_str(), 0, 16);
+    jumpto(address);
 
+}
+
+
+void idaapi calls_chooser_t::enter(ssize_t n) const {
+    msg("[+]choose_t::enter\n");
 }
 
 
@@ -214,16 +232,17 @@ struct plugin_ctx_t : public plugmod_t {
             nullptr,
             nullptr,
             -1));
-        hook_to_notification_point(HT_UI, ui_hook);
+        hook_to_notification_point(HT_UI, ui_hook); 
+        hook_to_notification_point(HT_VIEW, ui_hook_view);          //对choose没用,(choose不是view)
     }
     virtual bool idaapi run(size_t) override;
 
     ~plugin_ctx_t() {
         unregister_action(action_internal_name_1);
         unhook_from_notification_point(HT_UI, ui_hook);
+        unhook_from_notification_point(HT_UI, ui_hook_view);
         term_hexrays_plugin();
     }
-
 };
 
 
