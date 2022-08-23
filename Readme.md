@@ -15,5 +15,5 @@ Comment那个框实现单击跳转，双击是最好的，但是choose好像实�
 
 
 
-![Image Text](https://github.com/helloobaby/ida-comment-view/blob/master/screenshot-20220811-181545.png)
+![image](https://github.com/helloobaby/ida-comment-view/blob/master/demonstrate.gif)
 
