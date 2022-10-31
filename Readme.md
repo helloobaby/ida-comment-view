@@ -1,19 +1,7 @@
-##### 编译步骤:  
+##### 如何自己编译：
 
+1.修改build32.bat和build64.bat中的IDA_INSTALL_DIR为自己电脑上的IDA根目录，在编译完成之后
 
-ida都是64位的，用ida分析32位的软件用32位的CMakeLists,分析64位的软件用64位的CmakeLists
+会自动的拷贝编译好的dll到plugins文件夹
 
-
-
-
-
-##### 问题: 
-
-F5界面的注释拿不到
-
-Comment那个框实现单击跳转，双击是最好的，但是choose好像实现不了双击(只有一个select成员函数可以用)
-
-
-
-![image](https://github.com/helloobaby/ida-comment-view/blob/master/demonstrate.gif)
-
+2.如果是编译ida.exe的插件，双击build32.bat，如果是ida64.exe，双击build64.bat
