@@ -148,7 +148,9 @@ calls_chooser_t::calls_chooser_t() : chooser_t(0, sizeof(widths_)/sizeof(int), w
 void idaapi calls_chooser_t::select(ssize_t n) const {
 
     auto item = list[n];
+#ifdef DEBUG
     msg("[+]select address %s\n",item.address.c_str());
+#endif
     ea_t address = std::stoull(item.address.c_str(), 0, 16);
     jumpto(address);
 
@@ -156,7 +158,10 @@ void idaapi calls_chooser_t::select(ssize_t n) const {
 
 
 void idaapi calls_chooser_t::enter(ssize_t n) const {
+#ifdef DEBUG
     msg("[+]choose_t::enter\n");
+#endif  // DEBUG
+
 }
 
 
@@ -164,17 +169,19 @@ void idaapi calls_chooser_t::enter(ssize_t n) const {
 void calls_chooser_t::build_list() {
     
     int seg_count = get_segm_qty();
+#ifdef DEBUG
     msg("[+]seg count %d\n", seg_count);
-
-
+#endif  // DEBUG
     for (int s = 0; s < seg_count; s++) {
         segment_t* seg = getnseg(s);
 
         ea_t seg_start = seg->start_ea;
         ea_t seg_end = seg->end_ea;
         insn_t insn;
-
+#ifdef DEBUG
         msg(std::format("[+]seg_start : {:#x},seg_end : {:#x}\n", seg_start, seg_end).c_str());
+#endif  // DEBUG
+
 
         for (ea_t i = seg_start; i < seg_end;)
         {
@@ -184,7 +191,7 @@ void calls_chooser_t::build_list() {
                 std::string utf8 = to_utf8(to_utf16((*ret).c_str()));
                 list.push_back({ std::format("{:#x}", i).c_str() ,utf8.c_str() });
             }
-            if (length) {       //注释在指令范围内,越过这条指令
+            if (length) {       //注释在指令范围内,越过这条指令,加快搜索速度
                 i = i + length;
             }
             else i++;
@@ -262,7 +269,6 @@ static plugmod_t* idaapi init() {
         return nullptr;  // plugin will not be loaded
     }
 
-    msg(std::format("[{}]make sure your IDA version not lower than 7.5\n", PLUGIN.wanted_name).c_str());
     return new plugin_ctx_t;
 }
 
