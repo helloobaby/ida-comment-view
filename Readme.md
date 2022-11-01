@@ -14,3 +14,6 @@ cmake -Dbuildfor="ida" -DIDA_INSTALL_DIR="E:\IDA Pro 7.6" ..
 
 
 
+```cpp
+![image](https://github.com/helloobaby/ida-comment-view/blob/master/docs/show_usage.gif)
+```
