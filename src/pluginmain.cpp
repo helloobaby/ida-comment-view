@@ -21,14 +21,16 @@ ssize_t idaapi ui_hook(void* user_data, int notification_code, va_list va)
 
             attach_action_to_popup(view, p, action_internal_name_1, nullptr, SETMENU_POSMASK);
         }
-    }
-
+    } 
     return false;
 }
 
 ssize_t idaapi ui_hook_view(void* user_data, int notification_code, va_list va) {
     if (notification_code == view_notification_t::view_dblclick) {
-        //msg("[+]dbg click\n");
+#ifdef DEBUG
+        msg("[+]dbg click\n");
+#endif  // DEBUG
+
     }
 
     return false;
@@ -130,6 +132,7 @@ calls_chooser_t::calls_chooser_t() : chooser_t(0, sizeof(widths_)/sizeof(int), w
     build_list();
 }
 
+// 左键右键单击就会触发这个函数
 void idaapi calls_chooser_t::select(ssize_t n) const {
 
     auto item = list[n];
@@ -176,7 +179,7 @@ void calls_chooser_t::build_list() {
                 std::string utf8 = ((*ret).c_str());
                 list.push_back({ std::format("{:#x}", i).c_str() ,utf8.c_str() });
             }
-            if (length) {       //注释在指令范围内,越过这条指令,加快搜索速度
+            if (length) {       //注释在指令范围内,越过这条指令(减少相同注释)
                 i = i + length;
             }
             else i++;
@@ -225,7 +228,8 @@ struct plugin_ctx_t : public plugmod_t {
             nullptr,
             -1));
         hook_to_notification_point(HT_UI, ui_hook); 
-        hook_to_notification_point(HT_VIEW, ui_hook_view);          //对choose没用,(choose不是view)
+        hook_to_notification_point(HT_VIEW, ui_hook_view);          //对chooser没用,(chooser不是view)
+        
     }
     virtual bool idaapi run(size_t) override;
 
