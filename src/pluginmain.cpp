@@ -1,3 +1,5 @@
+#include "code_cvt.h"
+
 #include <hexrays_sdk/include/hexrays.hpp>
 #include <graph.hpp>
 #include <optional>
@@ -8,23 +10,6 @@
 
 #define action_internal_name_1 "pdbheader::CommentView"
 #define action_show_name_1 "CommentView"
-
-// encoding function
-std::string to_utf8(const std::wstring& wide_string)
-{
-    static std::wstring_convert<std::codecvt_utf8<wchar_t>> utf8_conv;
-
-    return utf8_conv.to_bytes(wide_string);
-}
-
-
-std::wstring to_utf16(const std::string& u8string) {
-    
-    static std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t> utf16_conv;
-
-
-    return utf16_conv.from_bytes(u8string);
-}
 
 ssize_t idaapi ui_hook(void* user_data, int notification_code, va_list va)
 {
@@ -188,7 +173,7 @@ void calls_chooser_t::build_list() {
             auto length = decode_insn(&insn, i);
             std::optional<qstring> ret = get_ea_comment(i);
             if (ret) {
-                std::string utf8 = to_utf8(to_utf16((*ret).c_str()));
+                std::string utf8 = ((*ret).c_str());
                 list.push_back({ std::format("{:#x}", i).c_str() ,utf8.c_str() });
             }
             if (length) {       //注释在指令范围内,越过这条指令,加快搜索速度

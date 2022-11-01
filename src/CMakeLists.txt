@@ -1,10 +1,10 @@
 ﻿
 if(${buildfor} STREQUAL "ida")
-    add_library(comment_view SHARED dllmain.cpp pch.cpp pch.h pluginmain.cpp framework.h) 
+    add_library(comment_view SHARED dllmain.cpp pch.cpp pch.h pluginmain.cpp framework.h code_cvt.h) 
     SET_TARGET_PROPERTIES(comment_view PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${IDA_INSTALL_DIR}/plugins/)
     SET_TARGET_PROPERTIES(comment_view PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${IDA_INSTALL_DIR}/plugins/)
 elseif(${buildfor} STREQUAL "ida64")
-    add_library(comment_view64 SHARED dllmain.cpp pch.cpp pch.h pluginmain.cpp framework.h) 
+    add_library(comment_view64 SHARED dllmain.cpp pch.cpp pch.h pluginmain.cpp framework.h code_cvt.h) 
     SET_TARGET_PROPERTIES(comment_view64 PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${IDA_INSTALL_DIR}/plugins/)
     SET_TARGET_PROPERTIES(comment_view64 PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${IDA_INSTALL_DIR}/plugins/)
 endif()
